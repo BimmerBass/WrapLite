@@ -157,6 +157,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="WrapLite\query\query.cpp" />
+    <ClCompile Include="WrapLite\session.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WrapLite\exceptions\api_exception.h" />
+    <ClInclude Include="WrapLite\exceptions\sqlite3_exception.h" />
+    <ClInclude Include="WrapLite\query\query.h" />
+    <ClInclude Include="WrapLite\session.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
