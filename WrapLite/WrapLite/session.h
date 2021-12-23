@@ -5,17 +5,17 @@
 
 #include <Legacy/sqlite3.h>
 
-namespace WrapLite {
+namespace wraplite {
 	using session_t = std::shared_ptr<sqlite3>;
 
 	/// <summary>
 	/// Wrapper for the sqlite3* object used to establish and break the connection to the database.
 	/// </summary>
-	class DatabaseSession {
+	class database_session final {
 	public:
 		// No default construction
-		DatabaseSession() = delete;
-		DatabaseSession(const std::string& filepath);
+		database_session() = delete;
+		database_session(const std::string& filepath);
 
 		operator sqlite3* () const {
 			return m_session.get();

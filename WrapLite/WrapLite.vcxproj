@@ -165,6 +165,7 @@
     <ClInclude Include="WrapLite\exceptions\sqlite3_exception.h" />
     <ClInclude Include="WrapLite\query\query.h" />
     <ClInclude Include="WrapLite\session.h" />
+    <ClInclude Include="WrapLite\types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

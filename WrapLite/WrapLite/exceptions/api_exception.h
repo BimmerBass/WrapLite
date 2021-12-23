@@ -2,7 +2,7 @@
 #define API_EXCEPTION_H
 #include <exception>
 
-namespace WrapLite::Exceptions {
+namespace wraplite::exceptions {
 
 	class api_exception : public std::exception {
 	public:

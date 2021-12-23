@@ -4,16 +4,16 @@
 #include "exceptions/api_exception.h"
 #include "exceptions/sqlite3_exception.h"
 
-namespace WrapLite {
+namespace wraplite {
 
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <param name="filepath"></param>
-	DatabaseSession::DatabaseSession(const std::string& filepath) {
+	database_session::database_session(const std::string& filepath) {
 		// Check if the databse file exists. Throw if it doesn't.
 		if (filepath != ":memory:" && !std::filesystem::exists(filepath)) {
-			throw Exceptions::api_exception("No database file at the specified path.");
+			throw exceptions::api_exception("No database file at the specified path.");
 		}
 
 		// Open the connection to the database.
@@ -24,13 +24,10 @@ namespace WrapLite {
 			SQLITE_OPEN_NOMUTEX,
 			NULL
 		); result != SQLITE_OK) {
-			std::string errmsg = "Error occured while opening database: sqlite3 legacy-API returned error code " 
-				+ std::to_string(sqlite3_errcode(tmp)) + " (extended: " + std::to_string(sqlite3_extended_errcode(tmp)) + "), with message: '"
-				+ sqlite3_errmsg(tmp) + "'.";
-
 			// Even though and error occured, the docs say that the connection should still be closed properly.
+			exceptions::sqlite_exception e(tmp, "sqlite3_open_v2");
 			sqlite3_close_v2(tmp);
-			throw Exceptions::sqlite_exception(errmsg.c_str());
+			throw e;
 		}
 
 		// Copy the pointer to the opened database.
