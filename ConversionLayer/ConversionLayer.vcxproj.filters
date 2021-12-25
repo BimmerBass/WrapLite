@@ -15,24 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WrapLite\query\query.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WrapLite\session.cpp">
+    <ClCompile Include="ConversionLayer\conversion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WrapLite\query\query.h">
+    <ClInclude Include="ConversionLayer\conversion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WrapLite\session.h">
+    <ClInclude Include="ConversionLayer\exceptions\sqlite3_exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WrapLite\types.h">
+    <ClInclude Include="ConversionLayer\exceptions\api_exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

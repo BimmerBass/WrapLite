@@ -1,8 +1,11 @@
 #ifndef SQLITE3_EXCEPTION_H
 #define SQLITE3_EXCEPTION_H
 #include <exception>
+#include <string>
 
-namespace wraplite::exceptions {
+#include <Legacy/sqlite3.h>
+
+namespace conversion_layer::exceptions {
 
 	class sqlite_exception : public std::exception {
 	public:

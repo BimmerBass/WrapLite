@@ -1,12 +1,11 @@
 #ifndef SESSION_H
 #define SESSION_H
-#include <memory>
 #include <string>
 
-#include <Legacy/sqlite3.h>
+#include <ConversionLayer/conversion.h>
 
 namespace wraplite {
-	using session_t = std::shared_ptr<sqlite3>;
+	using session_t = conversion_layer::session_t;
 
 	/// <summary>
 	/// Wrapper for the sqlite3* object used to establish and break the connection to the database.

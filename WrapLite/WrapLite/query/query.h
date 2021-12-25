@@ -6,7 +6,6 @@
 
 #include "../session.h"
 #include "../types.h"
-#include "../exceptions/sqlite3_exception.h"
 
 namespace wraplite::sql {
 
