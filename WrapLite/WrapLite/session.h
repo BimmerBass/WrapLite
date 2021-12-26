@@ -5,7 +5,7 @@
 #include <ConversionLayer/conversion.h>
 
 namespace wraplite {
-	using session_t = conversion_layer::session_t;
+	using session_t = conversion_layer::types::session_t;
 
 	/// <summary>
 	/// Wrapper for the sqlite3* object used to establish and break the connection to the database.

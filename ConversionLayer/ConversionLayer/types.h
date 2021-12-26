@@ -1,16 +1,22 @@
 #ifndef TYPES_H
 #define TYPES_H
-#include <type_traits>
+#include <memory>
 #include <string>
 
+#include <Legacy/sqlite3.h>
 
-namespace wraplite::types {
+namespace wraplite::conversion_layer::types {
 
-	// Concept declarations.
+	// Type definitions.
+	using session_t = std::shared_ptr<sqlite3>;
+	using statement_t = std::shared_ptr<sqlite3_stmt>;
+
+	// Input and output types.
+	// TODO: Implement this as C++20 with concepts instead of empty structs.
 	template<typename T>
 	concept sql_integral =
-		std::is_integral_v<T> &&	// Must be an integer type.
-		sizeof(T) <= 8;				// No more than 64-bits can be stored as an integer in SQLite.
+		std::is_integral_v<T>;
+
 
 	template<typename T>
 	concept sql_decimal =
@@ -20,7 +26,11 @@ namespace wraplite::types {
 	// Note: This should later be expanded to also support UTF-16 strings.
 	template<typename T>
 	concept sql_text =
-		std::is_same_v<std::string, T>;	// String...
+		std::is_same_v<std::string, T> &&	// String...
+		requires (T t) {
+			{ t.c_str() } -> std::same_as<const char*>;
+			{ t.length() } -> std::same_as<size_t>;
+	};
 
 	// General data types.
 	template<typename T>

@@ -2,7 +2,7 @@
 #define API_EXCEPTION_H
 #include <exception>
 
-namespace conversion_layer::exceptions {
+namespace wraplite::conversion_layer::exceptions {
 
 	class api_exception : public std::exception {
 	public:

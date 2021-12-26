@@ -5,7 +5,7 @@
 
 #include <Legacy/sqlite3.h>
 
-namespace conversion_layer::exceptions {
+namespace wraplite::conversion_layer::exceptions {
 
 	class sqlite_exception : public std::exception {
 	public:

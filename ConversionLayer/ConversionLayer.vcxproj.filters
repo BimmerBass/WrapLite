@@ -29,5 +29,14 @@
     <ClInclude Include="ConversionLayer\exceptions\api_exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ConversionLayer\types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConversionLayer\binds.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConversionLayer\extraction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

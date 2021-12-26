@@ -158,7 +158,6 @@
   <ItemGroup>
     <ClInclude Include="WrapLite\query\query.h" />
     <ClInclude Include="WrapLite\session.h" />
-    <ClInclude Include="WrapLite\types.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConversionLayer\ConversionLayer.vcxproj">
