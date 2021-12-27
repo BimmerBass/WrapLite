@@ -17,7 +17,7 @@ namespace wraplite::sql {
 	class query {
 	public:
 		query() = delete; // No default construction.
-		query(const std::string& query_str);
+		query(const std::string& query_str, std::shared_ptr<database_session> session_ptr);
 
 		// The destructor is allowed to throw exceptions.
 		~query() noexcept(false);
@@ -71,7 +71,7 @@ namespace wraplite::sql {
 		bool has_run;
 
 		// The current index we're at in the statement parameters.
-		size_t current_idx = 0;
+		size_t current_idx;
 
 		size_t next_idx() {
 			return ++current_idx;

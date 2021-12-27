@@ -24,6 +24,13 @@ namespace wraplite::conversion_layer {
 	void close_db(types::session_t session);
 
 	/// <summary>
+	/// Prepare an SQLite query.
+	/// </summary>
+	/// <param name="query_str"></param>
+	/// <param name="session_ptr"></param>
+	types::statement_t prepare_statement(const std::string& query_str, std::shared_ptr<sqlite3> session_ptr);
+
+	/// <summary>
 	/// Execute a query
 	/// </summary>
 	/// <typeparam name="function"></typeparam>

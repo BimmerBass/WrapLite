@@ -48,4 +48,25 @@ namespace wraplite::conversion_layer {
 		}
 	}
 
+
+	/// <summary>
+	/// Prepare an SQLite query.
+	/// </summary>
+	/// <param name="query_str"></param>
+	/// <param name="session_ptr"></param>
+	types::statement_t prepare_statement(const std::string& query_str, std::shared_ptr<sqlite3> session_ptr) {
+		// Firstly prepare a raw statement pointer.
+		sqlite3_stmt* tmp;
+		if (int result = sqlite3_prepare_v2(
+			session_ptr.get(), 
+			query_str.c_str(), 
+			-1, 
+			&tmp, 
+			NULL); result != SQLITE_OK) {
+
+			throw exceptions::sqlite_exception(session_ptr.get(), "sqlite3_prepare_v2");
+		}
+		return types::statement_t(tmp, [=](sqlite3_stmt* st) { sqlite3_finalize(st); });
+	}
+
 }
