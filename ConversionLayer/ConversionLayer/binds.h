@@ -14,7 +14,7 @@ namespace wraplite::conversion_layer {
 	/// <param name="stmt"></param>
 	/// <param name="idx"></param>
 	/// <param name="insert_val"></param>
-	template<typename T> requires types::sql_integral<T>
+	template<typename T> requires types::sql_int<T>
 	void bind(types::statement_t stmt, int idx, const T& val) {
 		if (int result = sqlite3_bind_int(stmt.get(), idx, val); result != SQLITE_OK) {
 			throw exceptions::sqlite_exception();
@@ -27,8 +27,8 @@ namespace wraplite::conversion_layer {
 	/// <param name="stmt"></param>
 	/// <param name="idx"></param>
 	/// <param name="insert_val"></param>
-	template<>
-	inline void bind<sqlite3_int64>(types::statement_t stmt, int idx, const sqlite3_int64& val) {
+	template<typename T> requires types::sql_bigint<T>
+	void bind(types::statement_t stmt, int idx, const T& val) {
 		if (int result = sqlite3_bind_int64(stmt.get(), idx, val); result != SQLITE_OK) {
 			throw exceptions::sqlite_exception();
 		}

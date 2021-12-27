@@ -12,10 +12,22 @@ namespace wraplite::conversion_layer::types {
 	using statement_t = std::shared_ptr<sqlite3_stmt>;
 
 	// Input and output types.
-	// TODO: Implement this as C++20 with concepts instead of empty structs.
+	template<typename T>
+	concept sql_int =
+		std::is_integral_v<T> &&
+		sizeof(T) <= 4 &&
+		std::is_signed_v<T>;
+
+	template<typename T>
+	concept sql_bigint =
+		(std::is_integral_v<T> &&
+			sizeof(T) > 4 && // Bigger than four bytes.
+			std::is_signed_v<T>)
+		|| std::is_same_v<sqlite3_int64, T>;
+
 	template<typename T>
 	concept sql_integral =
-		std::is_integral_v<T>;
+		sql_int<T> || sql_bigint<T>;
 
 
 	template<typename T>
