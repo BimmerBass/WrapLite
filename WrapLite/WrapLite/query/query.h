@@ -100,12 +100,6 @@ namespace wraplite::sql {
 		size_t next_idx() {
 			return ++current_idx;
 		}
-
-
-		template<typename function, typename... args>
-		inline void bind_callback(function&& callback) {
-			callback(conversion_layer::get_column<args>()...);
-		}
 	};
 }
 
