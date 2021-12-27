@@ -32,5 +32,8 @@
     <ClInclude Include="WrapLite\session.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WrapLite\callable\callback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

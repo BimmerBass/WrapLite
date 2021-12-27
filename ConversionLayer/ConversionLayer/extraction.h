@@ -48,7 +48,7 @@ namespace wraplite::conversion_layer {
 		}
 
 		// From the documentation, sqlite3_column_text always return null-terminated strings, so we can immediately cast it to the desired string format and return.
-		return T(static_cast<const char*>(sqlite3_column_text(stmt.get(), column_idx)));
+		return T(reinterpret_cast<const char*>(sqlite3_column_text(stmt.get(), column_idx)));
 	}
 
 	/// <summary>
@@ -59,10 +59,10 @@ namespace wraplite::conversion_layer {
 	/// <param name="stmt"></param>
 	/// <param name="column_idx"></param>
 	/// <returns></returns>
-	template<typename _Ty, typename _Alloc> requires types::sql_general_type<_Ty>
-	std::vector<_Ty, _Alloc> get_column(types::statement_t stmt, int column_idx) {
+	template<typename _Ty> requires types::sql_general_type<_Ty>
+	std::vector<_Ty> get_column(types::statement_t stmt, int column_idx) {
 		if (sqlite3_column_type(stmt.get(), column_idx) == SQLITE_NULL) {
-			return std::vector<_Ty, _Alloc>();
+			return std::vector<_Ty>();
 		}
 
 		// Get the length in bytes and the void pointer.
@@ -73,7 +73,7 @@ namespace wraplite::conversion_layer {
 		_Ty* converted_data = static_cast<_Ty*>(column_data);
 		size_t converted_length = data_length / sizeof(_Ty);
 
-		return std::vector<_Ty, _Alloc>(converted_data, converted_data + converted_length);
+		return std::vector<_Ty>(converted_data, converted_data + converted_length);
 	}
 }
 

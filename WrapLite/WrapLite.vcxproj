@@ -156,6 +156,7 @@
     <ClCompile Include="WrapLite\session.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="WrapLite\callable\callback.h" />
     <ClInclude Include="WrapLite\query\query.h" />
     <ClInclude Include="WrapLite\session.h" />
   </ItemGroup>

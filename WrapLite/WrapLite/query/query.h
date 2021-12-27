@@ -6,6 +6,7 @@
 
 #include <ConversionLayer/types.h>
 #include "../session.h"
+#include "../callable/callback.h"
 
 
 namespace wraplite::sql {
@@ -57,11 +58,11 @@ namespace wraplite::sql {
 
 		template<typename functor>
 		void operator>>(functor&& func) {
-			execute(
-				[func, this]() {
-					this->bind_callback(func);
-				}
-			);
+			typedef callable::utility::function_traits<functor> traits;
+
+			execute([&func, this]() {
+				callable::callback_binder<traits::arity>::create(this->get_statement(), func);
+				});
 		}
 
 		
@@ -81,6 +82,8 @@ namespace wraplite::sql {
 			has_run = true;
 			conversion_layer::execute_single_query(m_statement, callback);
 		}
+
+		types::statement_t& get_statement() { return m_statement; }
 	private:
 		// The session that allows us to communicate with the database.
 		std::shared_ptr<session_t::element_type> m_session;
