@@ -2,6 +2,7 @@
 #define CONVERSION_H
 #include <string>
 #include <functional>
+#include <stdexcept>
 
 #include "types.h"
 #include "binds.h"
@@ -36,7 +37,7 @@ namespace wraplite::conversion_layer {
 	/// <typeparam name="function"></typeparam>
 	/// <param name="stmt"></param>
 	/// <param name="callback"></param>
-	void execute_query(types::statement_t stmt, std::function<void(void)> callback) {
+	inline void execute_query(types::statement_t stmt, std::function<void(void)> callback) {
 
 		// Keep executing until there are no more rows.
 		int result;
@@ -55,7 +56,7 @@ namespace wraplite::conversion_layer {
 	/// <typeparam name="function"></typeparam>
 	/// <param name="stmt"></param>
 	/// <param name="callback"></param>
-	void execute_single_query(types::statement_t stmt, std::function<void(void)> callback) {
+	inline void execute_single_query(types::statement_t stmt, std::function<void(void)> callback) {
 		// Execute the query once.
 		int result = sqlite3_step(stmt.get());
 

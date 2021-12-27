@@ -7,12 +7,11 @@ namespace wraplite::sql {
 	/// Initialize a new sqlite3_stmt object.
 	/// </summary>
 	/// <param name="query_str"></param>
-	query::query(const std::string& query_str, std::shared_ptr<database_session> session_ptr) 
-		: m_session(session_ptr), has_run(false), current_idx(0) {
+	query::query(const std::string& query_str, const database_session& session)
+		: m_session(session.get_connection()), has_run(false), current_idx(0) {
 
 		// Create the statement object.
-		std::shared_ptr<sqlite3> connection((sqlite3*)(*session_ptr.get()));
-		m_statement = conversion_layer::prepare_statement(query_str, connection);
+		m_statement = conversion_layer::prepare_statement(query_str, m_session);
 	}
 
 	/// <summary>
@@ -21,7 +20,7 @@ namespace wraplite::sql {
 	/// <returns></returns>
 	query::~query() noexcept(false) {
 		if (std::uncaught_exceptions() <= 0 && !has_run) {
-			execute();
+			execute({});
 		}
 	}
 }

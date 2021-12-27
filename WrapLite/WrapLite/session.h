@@ -15,10 +15,9 @@ namespace wraplite {
 		// No default construction
 		database_session() = delete;
 		database_session(const std::string& filepath);
+		database_session(const database_session& _Src);
 
-		operator sqlite3* () const {
-			return m_session.get();
-		}
+		auto get_connection() const { return m_session; }
 	private:
 		session_t m_session = nullptr;
 	};

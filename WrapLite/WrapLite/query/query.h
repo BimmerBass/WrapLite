@@ -17,7 +17,7 @@ namespace wraplite::sql {
 	class query {
 	public:
 		query() = delete; // No default construction.
-		query(const std::string& query_str, std::shared_ptr<database_session> session_ptr);
+		query(const std::string& query_str, const database_session& session);
 
 		// The destructor is allowed to throw exceptions.
 		~query() noexcept(false);
@@ -49,20 +49,41 @@ namespace wraplite::sql {
 
 
 		// Operators for result extraction.
-		template<typename T> requires types::sql_integral<T>
-		void operator>>(T& out_val);
+		//template<typename T> requires types::sql_integral<T>
+		//void operator>>(T& out_val);
+		//
+		//template<typename ... args> requires types::sql_general_type<args...>
+		//void operator>>(std::tuple<args...>& out_vals);
+
+		template<typename functor>
+		void operator>>(functor&& func) {
+			execute(
+				[func, this]() {
+					this->bind_callback(func);
+				}
+			);
+		}
+
 		
-		template<typename ... args> requires types::sql_general_type<args...>
-		void operator>>(std::tuple<args...>& out_vals);
+		/// <summary>
+		/// Execute a query and call the callback method.
+		/// </summary>
+		void execute(std::function<void(void)> callback) {
+			has_run = true;
+			conversion_layer::execute_query(m_statement, callback);
+		}
 
-		template<typename ... args> requires types::sql_general_type<args...>
-		void operator>>(std::function<void(args...)>& func);
-
-		// Public member methods.
-		void execute();
+		/// <summary>
+		/// Execute a single row query.
+		/// </summary>
+		/// <param name="callback"></param>
+		void execute_single(std::function<void(void)> callback) {
+			has_run = true;
+			conversion_layer::execute_single_query(m_statement, callback);
+		}
 	private:
 		// The session that allows us to communicate with the database.
-		std::shared_ptr<database_session> m_session;
+		std::shared_ptr<session_t::element_type> m_session;
 
 		// The statement itself.
 		types::statement_t m_statement;
@@ -76,8 +97,13 @@ namespace wraplite::sql {
 		size_t next_idx() {
 			return ++current_idx;
 		}
-	};
 
+
+		template<typename function, typename... args>
+		inline void bind_callback(function&& callback) {
+			callback(conversion_layer::get_column<args>()...);
+		}
+	};
 }
 
 

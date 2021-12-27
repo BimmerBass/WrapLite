@@ -13,4 +13,7 @@ namespace wraplite {
 		m_session = conversion_layer::open_db(filepath);
 	}
 
+	database_session::database_session(const database_session& _Src) {
+		m_session = _Src.m_session;
+	}
 }

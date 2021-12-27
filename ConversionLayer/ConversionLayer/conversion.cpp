@@ -20,21 +20,21 @@ namespace wraplite::conversion_layer {
 
 		// Step 2. Now attempt to open the file.
 		sqlite3* tmp = nullptr;
-		if (int result = sqlite3_open_v2(
+		int result = sqlite3_open_v2(
 			file_path.c_str(),
 			&tmp,
-			SQLITE_OPEN_NOMUTEX,
+			SQLITE_OPEN_NOMUTEX | SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE,
 			NULL
-		); result != SQLITE_OK) {
-			// Even though and error occured, the docs say that the connection should still be closed properly.
-			exceptions::sqlite_exception e(tmp, "sqlite3_open_v2");
-			sqlite3_close_v2(tmp);
-			throw e;
+		);
+		std::shared_ptr<sqlite3> ret_val(tmp, [=](sqlite3* ptr) { sqlite3_close_v2(ptr); });
+
+		if (result != SQLITE_OK) {
+			throw tmp == nullptr ? exceptions::sqlite_exception() : exceptions::sqlite_exception(tmp, "sqlite3_open_v2");
 		}
 
 		// Return the pointer to the opened database.
 		// Also specify a custom deleter.
-		return std::shared_ptr<sqlite3>(tmp, [=](sqlite3* ptr) { sqlite3_close_v2(ptr); });
+		return ret_val;
 	}
 
 
