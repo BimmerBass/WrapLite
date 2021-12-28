@@ -1,7 +1,7 @@
 #include "query.h"
 
 
-namespace wraplite::sql {
+namespace wraplite::impl::sql {
 
 	/// <summary>
 	/// Initialize a new sqlite3_stmt object.

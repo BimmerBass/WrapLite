@@ -9,7 +9,7 @@
 #include "../callable/callback.h"
 
 
-namespace wraplite::sql {
+namespace wraplite::impl::sql {
 	namespace types = conversion_layer::types;
 
 	/// <summary>

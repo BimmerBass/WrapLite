@@ -3,7 +3,7 @@
 #include <filesystem>
 
 
-namespace wraplite {
+namespace wraplite::impl {
 
 	/// <summary>
 	/// Open the database connection

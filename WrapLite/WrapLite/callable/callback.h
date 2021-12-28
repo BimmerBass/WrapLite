@@ -9,7 +9,7 @@
 /// <summary>
 /// The following file is either completely stolen or inspired from sqlite_modern_cpp
 /// </summary>
-namespace wraplite::callable {
+namespace wraplite::impl::callable {
 
 
 	namespace utility {

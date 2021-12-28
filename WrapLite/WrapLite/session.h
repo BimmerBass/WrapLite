@@ -4,7 +4,7 @@
 
 #include <ConversionLayer/conversion.h>
 
-namespace wraplite {
+namespace wraplite::impl {
 	using session_t = conversion_layer::types::session_t;
 
 	/// <summary>
