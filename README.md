@@ -13,8 +13,8 @@ This project is a wrapper for the legacy [SQLite3 API](https://www.sqlite.org/am
 3. **WrapLite**: The project itself. This solely calls the conversion layer when communicating with the database, and is the high level API.
 
 ## To do:
-1. Add extraction methods for tuples and single variables instead of only lambda expressions.
-2. Change the `callback_binder` class to my own implementation.
-3. Write unit tests.
-4. Join the `query` and `database_session` classes into a single `session_handler` class, which will be the main endpoint of the API.
+1. Join the `query` and `database_session` classes into a single `session_handler` class, which will be the main endpoint of the API.
+2. Create a class that can specify options to use for the sqlite3 API. These will be all the flags that can be passed to sqlite3_open_v2.
+3. Change the `callback_binder` class to my own implementation.
+4. Write unit tests.
 5. Refactor existing code.
