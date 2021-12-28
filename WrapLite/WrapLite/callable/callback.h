@@ -92,6 +92,34 @@ namespace wraplite::callable {
 		using nth_argument_type = typename utility::function_traits<function>::template argument<idx>;
 	};
 
+	namespace tuples {
+		namespace detail {
+
+			template<size_t i = 0, typename functor, typename... args>
+			typename std::enable_if<i == sizeof...(args)>::type for_each(std::tuple<args...>&, functor, conversion_layer::types::statement_t&) {}
+		
+			template<size_t i = 0, typename functor, typename... args>
+			typename std::enable_if<(i < sizeof...(args))>::type for_each(std::tuple<args...>& tpl, functor func, conversion_layer::types::statement_t& stmt) {
+				func(stmt, i, std::get<i>(tpl));
+				for_each<i + 1, functor, args...>(tpl, func, stmt);
+			}
+
+			struct callback_functor {
+				template<typename T>
+				void operator() (conversion_layer::types::statement_t& stmt, int i, T&& t) {
+					conversion_layer::reference_wrap(stmt, i, t);
+				}
+			};
+		}
+
+		template<typename... args>
+		void for_each_in_tuple(conversion_layer::types::statement_t& stmt, std::tuple<args...>& t) {
+			conversion_layer::execute_single_query(stmt, [&]() {
+				detail::for_each(t, detail::callback_functor(), stmt);
+			});
+		}
+		
+	}
 }
 
 

@@ -40,10 +40,11 @@ int main() {
 		//}
 		std::string h_output = "";
 		std::string w_output = "";
-
-		sql::query q2("select * from hello_world where world like '%pt0%';", sess);
-		q2 >> std::tie(h_output, w_output);
 		
+		sql::query q2("select * from hello_world where world like '%pt0%';", sess);
+		
+		q2 >> std::tie(h_output, w_output);
+
 		std::cout << "OUTPUT H: " << h_output << std::endl;
 		std::cout << "OUTPUT W: " << w_output << std::endl;
 	}
@@ -51,5 +52,4 @@ int main() {
 		std::cout << e.what() << std::endl;
 		exit(EXIT_FAILURE);
 	}
-	catch (...) { exit(1); }
 }

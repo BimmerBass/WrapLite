@@ -57,7 +57,8 @@ namespace wraplite::sql {
 
 		template<typename ... args>
 		void operator>>(std::tuple<args...>&& out_vals) {
-			callable::tuple_iterate<std::tuple<args...>>::iterate(out_vals, this->get_statement());
+			has_run = true;
+			callable::tuples::for_each_in_tuple<args...>(m_statement, out_vals);
 		}
 
 		template<typename functor>

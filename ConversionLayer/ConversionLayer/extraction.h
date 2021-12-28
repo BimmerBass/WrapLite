@@ -75,6 +75,18 @@ namespace wraplite::conversion_layer {
 
 		return std::vector<_Ty>(converted_data, converted_data + converted_length);
 	}
+
+	/// <summary>
+	/// Wrap the get_column methods to modify a reference instead of returning a value.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
+	/// <param name="stmt"></param>
+	/// <param name="column_idx"></param>
+	/// <param name="value"></param>
+	template<typename T> requires types::sql_general_type<T>
+	void reference_wrap(types::statement_t stmt, int column_idx, T& value) {
+		value = get_column<T>(stmt, column_idx);
+	}
 }
 
 
