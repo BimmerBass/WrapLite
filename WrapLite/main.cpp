@@ -30,14 +30,22 @@ int main() {
 		}
 
 
-		std::vector<std::string> h;
-		std::vector<std::string> w;
-		sql::query q2("select * from hello_world;", sess);
-		q2 >> [&](std::string s1, std::string s2) {h.push_back(s1); w.push_back(s2); };
+		//std::vector<std::string> h;
+		//std::vector<std::string> w;
+		//sql::query q2("select * from hello_world;", sess);
+		//q2 >> [&](std::string s1, std::string s2) {h.push_back(s1); w.push_back(s2); };
+		//
+		//for (size_t i = 0; i < h.size(); i++) {
+		//	std::cout << h[i] << ": " << w[i] << std::endl;
+		//}
+		std::string h_output = "";
+		std::string w_output = "";
 
-		for (size_t i = 0; i < h.size(); i++) {
-			std::cout << h[i] << ": " << w[i] << std::endl;
-		}
+		sql::query q2("select * from hello_world where world like '%pt0%';", sess);
+		q2 >> std::tie(h_output, w_output);
+		
+		std::cout << "OUTPUT H: " << h_output << std::endl;
+		std::cout << "OUTPUT W: " << w_output << std::endl;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;

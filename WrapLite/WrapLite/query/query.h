@@ -50,11 +50,15 @@ namespace wraplite::sql {
 
 
 		// Operators for result extraction.
-		//template<typename T> requires types::sql_integral<T>
-		//void operator>>(T& out_val);
-		//
-		//template<typename ... args> requires types::sql_general_type<args...>
-		//void operator>>(std::tuple<args...>& out_vals);
+		template<typename T> requires types::sql_general_type<T>
+		void operator>>(T& out_val) {
+			out_val = single_callback_bind<T>();
+		}
+
+		template<typename ... args>
+		void operator>>(std::tuple<args...>&& out_vals) {
+			callable::tuple_iterate<std::tuple<args...>>::iterate(out_vals, this->get_statement());
+		}
 
 		template<typename functor>
 		void operator>>(functor&& func) {
@@ -100,6 +104,36 @@ namespace wraplite::sql {
 		size_t next_idx() {
 			return ++current_idx;
 		}
+
+		template<typename T>
+		T single_callback_bind() {
+			T out_var;
+
+			auto callback = [&](T v) {
+				out_var = v;
+			};
+			typedef callable::utility::function_traits<decltype(callback)> traits;
+
+			execute_single([callback, this]() {
+				callable::callback_binder<traits::arity>::create(this->get_statement(), callback);
+				});
+
+			return out_var;
+		}
+
+		//template<typename... args>
+		//void tuple_callback(std::tuple<args...>& out_tuple) {
+		//	// 1. Create a callback method that assigns the values to the tuple.
+		//	auto callback = [&](args... values) {
+		//		out_tuple = std::make_tuple(values...);
+		//	};
+		//	typedef callable::utility::function_traits<decltype(callback)> traits;
+		//
+		//	// 2. Execute the query.
+		//	execute_single([callback, this]() {
+		//		callable::callback_binder<traits::arity>::create(this->get_statement(), callback);
+		//	});
+		//}
 	};
 }
 
