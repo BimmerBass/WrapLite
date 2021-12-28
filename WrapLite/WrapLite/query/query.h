@@ -100,9 +100,9 @@ namespace wraplite::impl::sql {
 		bool has_run;
 
 		// The current index we're at in the statement parameters.
-		size_t current_idx;
+		int current_idx;
 
-		size_t next_idx() {
+		int next_idx() {
 			return ++current_idx;
 		}
 
@@ -121,20 +121,6 @@ namespace wraplite::impl::sql {
 
 			return out_var;
 		}
-
-		//template<typename... args>
-		//void tuple_callback(std::tuple<args...>& out_tuple) {
-		//	// 1. Create a callback method that assigns the values to the tuple.
-		//	auto callback = [&](args... values) {
-		//		out_tuple = std::make_tuple(values...);
-		//	};
-		//	typedef callable::utility::function_traits<decltype(callback)> traits;
-		//
-		//	// 2. Execute the query.
-		//	execute_single([callback, this]() {
-		//		callable::callback_binder<traits::arity>::create(this->get_statement(), callback);
-		//	});
-		//}
 	};
 }
 

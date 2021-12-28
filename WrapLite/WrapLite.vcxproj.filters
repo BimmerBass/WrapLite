@@ -24,6 +24,9 @@
     <ClCompile Include="WrapLite\session.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WrapLite\api.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WrapLite\query\query.h">
@@ -33,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WrapLite\callable\callback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WrapLite\api.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

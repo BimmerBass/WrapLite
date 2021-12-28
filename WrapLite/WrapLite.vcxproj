@@ -152,10 +152,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="WrapLite\api.cpp" />
     <ClCompile Include="WrapLite\query\query.cpp" />
     <ClCompile Include="WrapLite\session.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="WrapLite\api.h" />
     <ClInclude Include="WrapLite\callable\callback.h" />
     <ClInclude Include="WrapLite\query\query.h" />
     <ClInclude Include="WrapLite\session.h" />
