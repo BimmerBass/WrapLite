@@ -164,6 +164,7 @@
     <ClInclude Include="ConversionLayer\exceptions\api_exception.h" />
     <ClInclude Include="ConversionLayer\exceptions\sqlite3_exception.h" />
     <ClInclude Include="ConversionLayer\extraction.h" />
+    <ClInclude Include="ConversionLayer\options.h" />
     <ClInclude Include="ConversionLayer\types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
