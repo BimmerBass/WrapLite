@@ -13,8 +13,8 @@ This project is a wrapper for the legacy [SQLite3 API](https://www.sqlite.org/am
 3. **WrapLite**: The project itself. This solely calls the conversion layer when communicating with the database, and is the high level API.
 
 ## To do:
-1. Join the `query` and `database_session` classes into a single `session_handler` class, which will be the main endpoint of the API.
-2. Create a class that can specify options to use for the sqlite3 API. These will be all the flags that can be passed to sqlite3_open_v2.
+1. Create a class that can specify options to use for the sqlite3 API. These will be all the flags that can be passed to sqlite3_open_v2.
+2. Add static methods to create and delete existing databases as well as get general non-connection dependent information from them.
 3. Change the `callback_binder` class to my own implementation.
 4. Write unit tests.
 5. Refactor existing code.
