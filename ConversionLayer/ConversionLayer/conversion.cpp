@@ -12,13 +12,8 @@ namespace wraplite::conversion_layer {
 	/// </summary>
 	/// <param name="file_path"></param>
 	/// <returns></returns>
-	types::session_t open_db(const std::string& file_path, bool should_exist) {
-		// Step 1. Check if the file exists, and throw if it doesn't.
-		if (file_path != ":memory:" && should_exist && !std::filesystem::exists(file_path)) {
-			throw exceptions::api_exception("No database file at the specified path.");
-		}
-
-		// Step 2. Now attempt to open the file.
+	types::session_t open_db(const std::string& file_path) {
+		// Attempt to open the file.
 		sqlite3* tmp = nullptr;
 		int result = sqlite3_open_v2(
 			file_path.c_str(),

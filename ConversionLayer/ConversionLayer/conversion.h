@@ -15,7 +15,7 @@ namespace wraplite::conversion_layer {
 	/// </summary>
 	/// <param name="file_path"></param>
 	/// <returns></returns>
-	types::session_t open_db(const std::string& file_path, bool should_exist = false);
+	types::session_t open_db(const std::string& file_path);
 
 
 	/// <summary>

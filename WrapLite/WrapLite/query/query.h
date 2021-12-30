@@ -42,6 +42,11 @@ namespace wraplite::impl::sql {
 			return *this;
 		}
 
+		// Overload for the string stream operator.
+		query& operator<<(const char* str) {
+			return *this << std::string(str);
+		}
+
 		template<typename T, typename _Alloc> requires types::sql_general_type<T>
 		query& operator<<(const std::vector<T, _Alloc>& data) {
 			conversion_layer::bind<T, _Alloc>(m_statement, next_idx(), data);
