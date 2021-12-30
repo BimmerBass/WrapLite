@@ -7,8 +7,8 @@ namespace wraplite {
 	/// Open the database session.
 	/// </summary>
 	/// <param name="filepath"></param>
-	sqlite_api::sqlite_api(const std::string& filepath) {
-		m_session = std::make_shared<impl::database_session>(filepath);
+	sqlite_api::sqlite_api(const std::string& filepath, const conversion_layer::options::database_options& opts) {
+		m_session = std::make_shared<impl::database_session>(filepath, opts);
 	}
 
 	/// <summary>

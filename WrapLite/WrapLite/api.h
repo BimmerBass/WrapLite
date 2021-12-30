@@ -8,7 +8,7 @@ namespace wraplite {
 	class sqlite_api final {
 	public:
 		sqlite_api() = delete;
-		sqlite_api(const std::string& filepath);
+		sqlite_api(const std::string& filepath, const conversion_layer::options::database_options& opts = conversion_layer::options::database_options());
 
 		impl::sql::query operator<<(const std::string& sql);
 		impl::sql::query operator<<(const char* sql);

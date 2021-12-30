@@ -23,12 +23,12 @@ namespace wraplite::conversion_layer::options {
 			NOFOLLOW = SQLITE_OPEN_NOFOLLOW				/* Database filename can't be a symbolic link. */
 		};
 
-		open_flags operator|(const open_flags& o1, const open_flags& o2) {
+		inline open_flags operator|(const open_flags& o1, const open_flags& o2) {
 			return static_cast<open_flags>(
 				static_cast<int>(o1) | static_cast<int>(o2)
 				);
 		}
-		open_flags& operator|=(open_flags& o1, const open_flags& o2) {
+		inline open_flags& operator|=(open_flags& o1, const open_flags& o2) {
 			o1 = o1 | o2;
 			return o1;
 		}

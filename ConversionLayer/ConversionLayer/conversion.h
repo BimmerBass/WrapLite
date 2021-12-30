@@ -7,6 +7,7 @@
 #include "types.h"
 #include "binds.h"
 #include "extraction.h"
+#include "options.h"
 
 namespace wraplite::conversion_layer {
 
@@ -15,7 +16,7 @@ namespace wraplite::conversion_layer {
 	/// </summary>
 	/// <param name="file_path"></param>
 	/// <returns></returns>
-	types::session_t open_db(const std::string& file_path);
+	types::session_t open_db(const std::string& file_path, const options::database_options& opts);
 
 
 	/// <summary>

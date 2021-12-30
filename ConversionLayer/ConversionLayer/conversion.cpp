@@ -12,14 +12,14 @@ namespace wraplite::conversion_layer {
 	/// </summary>
 	/// <param name="file_path"></param>
 	/// <returns></returns>
-	types::session_t open_db(const std::string& file_path) {
+	types::session_t open_db(const std::string& file_path, const options::database_options& opts) {
 		// Attempt to open the file.
 		sqlite3* tmp = nullptr;
 		int result = sqlite3_open_v2(
 			file_path.c_str(),
 			&tmp,
-			SQLITE_OPEN_NOMUTEX | SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE,
-			NULL
+			static_cast<int>(opts.flags),
+			NULL							// <---- TODO: Add proper VFS options.
 		);
 		std::shared_ptr<sqlite3> ret_val(tmp, [=](sqlite3* ptr) { sqlite3_close_v2(ptr); });
 

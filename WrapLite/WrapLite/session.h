@@ -14,7 +14,7 @@ namespace wraplite::impl {
 	public:
 		// No default construction
 		database_session() = delete;
-		database_session(const std::string& filepath);
+		database_session(const std::string& filepath, const conversion_layer::options::database_options& opts);
 		database_session(const database_session& _Src);
 
 		auto get_connection() const { return m_session; }
